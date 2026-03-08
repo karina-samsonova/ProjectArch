@@ -25,20 +25,20 @@ class GenerateCodeAction : AnAction() {
 
     private fun generateCode(architecture: AppArchitecture, baseDir: File, project: Any?) {
         try {
-            val generator = CodeGenerator(project)
+            val generator = CodeGenerator()
             when (val result = generator.generate(architecture, baseDir)) {
                 is Result.Success<*> -> {
                     VirtualFileManager.getInstance().syncRefresh()
 
                     Messages.showInfoMessage(
-                        "Architecture code generated successfully!",
-                        "Success"
+                        "Код был успешно сгенерирован!",
+                        "Успешно"
                     )
                 }
                 is Result.Error -> {
                     Messages.showErrorDialog(
-                        "Error generating code: ${result.exception.message}",
-                        "Generation Error"
+                        "Ошибка генерации: ${result.exception.message}",
+                        "Ошибка"
                     )
                 }
 
@@ -46,8 +46,8 @@ class GenerateCodeAction : AnAction() {
             }
         } catch (ex: Exception) {
             Messages.showErrorDialog(
-                "Failed to generate architecture: ${ex.message}",
-                "Error"
+                "Не получилось сгенерировать архитектуру: ${ex.message}",
+                "Ошибка"
             )
         }
     }
