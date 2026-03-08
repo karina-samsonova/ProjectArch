@@ -4,8 +4,6 @@ import com.samsonova.projectarch.models.*
 
 object Templates {
 
-    // ==================== CORE: DATABASE ====================
-
     fun roomEntity(packagePrefix: String, model: DataModel): String {
         val kdoc = if (model.description.isNotBlank()) {
             """/**
@@ -75,8 +73,6 @@ interface ${model.name}Dao {
 """.trimIndent()
     }
 
-    // ==================== CORE: NETWORK ====================
-
     fun dto(packagePrefix: String, model: DataModel): String {
         val kdoc = if (model.description.isNotBlank()) {
             """/**
@@ -103,8 +99,6 @@ data class ${model.name}Dto(
 )
 """.trimIndent()
     }
-
-    // ==================== FEATURE: DOMAIN ====================
 
     fun domainModel(packagePrefix: String, model: DataModel): String {
         val kdoc = if (model.description.isNotBlank()) {
@@ -198,8 +192,6 @@ ${hiltAnnotation}class ${useCase.name}UseCase $injection {
 }
 """.trimIndent()
     }
-
-    // ==================== FEATURE: DATA ====================
 
     fun repositoryImpl(
         packagePrefix: String,
@@ -302,8 +294,6 @@ ${hiltImport}class ${model.name}RemoteDataSource $injection {
 }
 """.trimIndent()
     }
-
-    // ==================== FEATURE: PRESENTATION ====================
 
     fun composeScreen(packagePrefix: String, screen: Screen, useHilt: Boolean): String {
         val kdoc = if (screen.description.isNotBlank()) {
@@ -555,8 +545,6 @@ interface ${screen.name}Contract {
 """.trimIndent()
     }
 
-    // ==================== DI MODULES ====================
-
     fun hiltModule(packagePrefix: String, module: Module): String {
         val moduleName = module.name.replaceFirstChar { it.uppercase() }
 
@@ -626,8 +614,6 @@ object DatabaseModule {
 """.trimIndent()
     }
 
-    // ==================== DESIGN SYSTEM ====================
-
     fun theme(): String {
         return """
 package com.example.app.design_system.theme
@@ -647,5 +633,4 @@ fun AppTheme(content: @Composable () -> Unit) {
     }
 }
 
-// Extension functions
 fun String.decapitalize(): String = this.replaceFirstChar { it.lowercase() }

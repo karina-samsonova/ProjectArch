@@ -178,7 +178,6 @@ class CodeGenerator {
         module.screens.forEach { screen ->
             File(presentationDir, "screens").mkdirs()
 
-            // UI component
             when (screen.uiFramework) {
                 UIFramework.COMPOSE -> {
                     val screenCode = Templates.composeScreen(packagePrefix, screen, module.useHilt)
@@ -210,7 +209,6 @@ class CodeGenerator {
         module: Module
     ) {
         module.screens.forEach { screen ->
-            // UI component
             File(presentationDir, "screens").mkdirs()
             when (screen.uiFramework) {
                 UIFramework.COMPOSE -> {
@@ -249,7 +247,6 @@ class CodeGenerator {
 
             when (module.name) {
                 "database" -> {
-                    // Generate entities
                     allModels.forEach { model ->
                         File(moduleDir, "entities").mkdirs()
                         val entityCode = Templates.roomEntity(packagePrefix, model)
@@ -265,7 +262,6 @@ class CodeGenerator {
                     File(File(moduleDir, "di"), "DatabaseModule.kt").writeText(moduleCode)
                 }
                 "network" -> {
-                    // Generate DTOs
                     allModels.forEach { model ->
                         File(moduleDir, "model").mkdirs()
                         val dtoCode = Templates.dto(packagePrefix, model)
